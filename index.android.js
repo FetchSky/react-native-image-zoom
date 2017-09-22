@@ -1,11 +1,7 @@
-
-import React,{Component,PropTypes} from 'react';
-import {
-  requireNativeComponent,
-  View,
-} from 'react-native';
-import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
-
+import React, { Component } from "react";
+import { requireNativeComponent, View } from "react-native";
+import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
+import PropTypes from "prop-types";
 export default class ImageViewZoom extends Component {
   static propTypes = {
     ...View.propTypes,
@@ -13,17 +9,26 @@ export default class ImageViewZoom extends Component {
       PropTypes.shape({
         uri: PropTypes.string,
         thumbnail: PropTypes.string,
-        headers: PropTypes.object,
+        headers: PropTypes.object
       }),
       // Opaque type returned by require('./image.jpg')
-      PropTypes.number,
+      PropTypes.number
     ]),
     scale: PropTypes.number,
-    scaleType: PropTypes.oneOf(["center","centerCrop","centerInside","fitCenter","fitStart","fitEnd","fitXY","matrix"]),
-    onTap : PropTypes.func,
-    onLoad : PropTypes.func,
-    onScaleChange : PropTypes.func,
-    onMatrixChange : PropTypes.func,
+    scaleType: PropTypes.oneOf([
+      "center",
+      "centerCrop",
+      "centerInside",
+      "fitCenter",
+      "fitStart",
+      "fitEnd",
+      "fitXY",
+      "matrix"
+    ]),
+    onTap: PropTypes.func,
+    onLoad: PropTypes.func,
+    onScaleChange: PropTypes.func,
+    onMatrixChange: PropTypes.func
   };
 
   constructor(props) {
@@ -32,18 +37,17 @@ export default class ImageViewZoom extends Component {
 
   render() {
     const source = resolveAssetSource(this.props.source);
-    if (source && source.uri){
-
-      const props = {...this.props, src: source };
+    if (source && source.uri) {
+      const props = { ...this.props, src: source };
       return <ZoomImage {...props} />;
     }
-    return null
+    return null;
   }
 }
 
 const cfg = {
   nativeOnly: {
-    src: true,
-  },
+    src: true
+  }
 };
-const ZoomImage = requireNativeComponent('ImageViewZoom', ImageViewZoom, cfg);
+const ZoomImage = requireNativeComponent("ImageViewZoom", ImageViewZoom, cfg);
